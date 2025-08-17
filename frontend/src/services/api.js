@@ -1,17 +1,37 @@
 import axios from 'axios';
 
+// 1. Create the base Axios instance
 const API = axios.create({
   baseURL: 'http://localhost:5000/api',
 });
 
+// 2. Create the interceptor
+// This function will run before every single request is sent from the frontend
+API.interceptors.request.use((config) => {
+  // Get the token from localStorage
+  const token = localStorage.getItem('authToken');
+  
+  // If the token exists, add it to the 'Authorization' header
+  if (token) {
+    config.headers.Authorization = `Bearer ${token}`;
+  }
+  
+  // Return the modified request configuration
+  return config;
+}, (error) => {
+  // Handle any errors that occur during the request setup
+  return Promise.reject(error);
+});
+
+
+// --- AUTH ROUTES ---
+export const registerUser = (userData) => API.post('/auth/register', userData);
+export const loginUser = (userData) => API.post('/auth/login', userData);
+
+
+// --- VEHICLE ROUTES (NOW SECURE) ---
 export const getVehicles = () => API.get('/vehicles');
-export const deleteVehicle = (id) => API.delete(`/vehicles/${id}`);
-
-// Add this function
-export const createVehicle = (vehicleData) => API.post('/vehicles', vehicleData);
-
-// GET a single vehicle by its ID
 export const getVehicleById = (id) => API.get(`/vehicles/${id}`);
-
-// PUT (update) a vehicle by its ID
+export const createVehicle = (vehicleData) => API.post('/vehicles', vehicleData);
 export const updateVehicle = (id, vehicleData) => API.put(`/vehicles/${id}`, vehicleData);
+export const deleteVehicle = (id) => API.delete(`/vehicles/${id}`);
