@@ -35,3 +35,22 @@ export const getVehicleById = (id) => API.get(`/vehicles/${id}`);
 export const createVehicle = (vehicleData) => API.post('/vehicles', vehicleData);
 export const updateVehicle = (id, vehicleData) => API.put(`/vehicles/${id}`, vehicleData);
 export const deleteVehicle = (id) => API.delete(`/vehicles/${id}`);
+
+
+// --- WORKFLOW ROUTES ---
+export const getWorkflowsForVehicle = (vehicleId) => API.get(`/workflows/vehicle/${vehicleId}`);
+export const createWorkflow = (workflowData) => API.post('/workflows', workflowData);
+export const deleteWorkflow = (workflowId) => API.delete(`/workflows/${workflowId}`);
+
+
+// --- DOCUMENT ROUTES ---
+// Note: We use FormData here to handle the file upload
+export const getDocumentsForVehicle = (vehicleId) => API.get(`/documents/vehicle/${vehicleId}`); 
+export const uploadDocument = (formData) => {
+  return API.post('/documents/upload', formData, {
+    headers: {
+      'Content-Type': 'multipart/form-data',
+    },
+  });
+};
+export const deleteDocument = (documentId) => API.delete(`/documents/${documentId}`);

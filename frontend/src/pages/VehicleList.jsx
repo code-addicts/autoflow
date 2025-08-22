@@ -59,9 +59,15 @@ export default function VehicleList() {
           <tbody>
             {vehicles.length > 0 && vehicles.map((vehicle) => (
               <tr key={vehicle._id} className="hover:bg-gray-100 border-b border-gray-200">
+                
+                {/* --- THIS IS THE CHANGED PART --- */}
                 <td className="px-5 py-4 whitespace-nowrap">
-                  <p className="text-gray-900">{vehicle.ownerName}</p>
+                  <Link to={`/vehicle/${vehicle._id}`} className="text-gray-900 hover:text-indigo-600 font-semibold">
+                    {vehicle.ownerName}
+                  </Link>
                 </td>
+                {/* ------------------------------------ */}
+
                 <td className="px-5 py-4 whitespace-nowrap">
                   <p className="text-gray-900">{vehicle.registrationNumber}</p>
                 </td>

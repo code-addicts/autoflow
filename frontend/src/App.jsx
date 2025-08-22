@@ -6,6 +6,7 @@ import AddVehiclePage from './pages/AddVehiclePage';
 import EditVehiclePage from './pages/EditVehiclePage';
 import LoginPage from './pages/LoginPage';
 import RegistrationPage from './pages/RegistrationPage';
+import VehicleDetailPage from './pages/VehicleDetailPage';
 
 export default function App() {
   return (
@@ -22,6 +23,7 @@ export default function App() {
             <Route path="/" element={<VehicleList />} />
             <Route path="/add" element={<AddVehiclePage />} />
             <Route path="/edit/:id" element={<EditVehiclePage />} />
+            <Route path="/vehicle/:id" element={<VehicleDetailPage />} />
           </Route>
         </Routes>
       </main>
